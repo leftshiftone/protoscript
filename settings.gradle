@@ -1,0 +1,3 @@
+rootProject.name = rootProjectName
+
+include "protoscript-smtp"
