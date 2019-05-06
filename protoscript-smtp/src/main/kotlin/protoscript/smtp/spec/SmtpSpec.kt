@@ -23,7 +23,7 @@ class SmtpSpec(val message: MimeMessage) {
         SmtpContentSpec(builder).apply(config)
 
         val bodyPart = MimeBodyPart()
-        bodyPart.setContent(builder, "text/html")
+        bodyPart.setContent(builder.toString(), "text/html")
 
         multipart.addBodyPart(bodyPart, 0)
     }
