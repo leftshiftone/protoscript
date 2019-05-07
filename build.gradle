@@ -12,14 +12,21 @@ buildscript {
     }
 }
 
-subprojects {
+allprojects {
+    apply plugin: "nebula.nebula-release"
+
     repositories {
         jcenter()
         mavenCentral()
     }
 
+    release {
+        defaultVersionStrategy = nebula.plugin.release.NetflixOssStrategies.SNAPSHOT
+    }
+}
+
+subprojects {
     apply plugin: "kotlin"
-    apply plugin: "nebula.nebula-release"
     apply plugin: "org.jetbrains.dokka"
     apply plugin: "maven-publish"
     apply plugin: "com.jfrog.bintray"
@@ -34,9 +41,6 @@ subprojects {
         testCompile "org.junit.jupiter:junit-jupiter:5.4.2"
     }
 
-// release {
-//     defaultVersionStrategy = nebula.plugin.release.NetflixOssStrategies.SNAPSHOT
-// }
 
     task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
         outputFormat = "javadoc"
@@ -60,7 +64,7 @@ subprojects {
                 pom.withXml {
                     Node root = asNode()
                     root.appendNode("name", "ProtoScript")
-                    root.appendNode("description", "tbd")
+                    root.appendNode("description", "ProtoScript is an open source software library for script based handling of various protocols.")
                     root.appendNode("url", "https://github.com/leftshiftone/protoscript")
 
                     Node licenses = root.appendNode("licenses")
