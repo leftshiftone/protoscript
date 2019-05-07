@@ -5,7 +5,7 @@ import javax.mail.internet.MimeBodyPart
 import javax.mail.internet.MimeMultipart
 import javax.mail.util.ByteArrayDataSource
 
-class SmtpAttachmentSpec(val multipart: MimeMultipart) {
+class SmtpAttachmentSpec(private val multipart: MimeMultipart) {
 
     fun jpg(bytes: ByteArray, name: String) = multipart.addBodyPart(toMimeBodyPart(bytes, "image/jpg", "${name}.jpg"))
     fun xml(bytes: ByteArray, name: String) = multipart.addBodyPart(toMimeBodyPart(bytes, "application/xml", "${name}.xml"))

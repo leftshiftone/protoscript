@@ -1,6 +1,6 @@
 package protoscript.smtp.spec
 
-class SmtpContentSpec(val builder:StringBuilder) {
+class SmtpContentSpec(private val builder:StringBuilder) {
 
     fun headline(text:String) = builder.append("<h1>$text</h1>")
     fun bold(text:String) = builder.append("<b>$text</b>")

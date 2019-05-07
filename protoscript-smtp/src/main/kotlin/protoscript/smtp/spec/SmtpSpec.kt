@@ -12,13 +12,14 @@ class SmtpSpec(val message: MimeMessage) {
         message.setContent(multipart)
     }
 
-    fun header(from: String, subject: String, config: SmtpHeaderSpec.() -> Unit) {
+    fun header(from: String, subject: String, config: SmtpHeaderSpec.() -> Unit):SmtpSpec {
         message.setFrom(from)
         message.setSubject(subject)
         SmtpHeaderSpec(message).apply(config)
+        return this
     }
 
-    fun content(config: SmtpContentSpec.() -> Unit) {
+    fun content(config: SmtpContentSpec.() -> Unit):SmtpSpec {
         val builder = StringBuilder()
         SmtpContentSpec(builder).apply(config)
 
@@ -26,10 +27,12 @@ class SmtpSpec(val message: MimeMessage) {
         bodyPart.setContent(builder.toString(), "text/html")
 
         multipart.addBodyPart(bodyPart, 0)
+        return this
     }
 
-    fun attachment(config: SmtpAttachmentSpec.() -> Unit) {
+    fun attachment(config: SmtpAttachmentSpec.() -> Unit):SmtpSpec {
         SmtpAttachmentSpec(multipart).apply(config)
+        return this
     }
 
 }

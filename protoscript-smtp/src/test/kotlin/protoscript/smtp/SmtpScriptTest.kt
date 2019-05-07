@@ -1,20 +1,21 @@
 package protoscript.smtp
 
-import protoscript.smtp.SmtpScript.Companion.smtp
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import protoscript.smtp.SmtpScript.Companion.send
+import protoscript.smtp.SmtpScript.Companion.smtp
 import javax.mail.internet.InternetAddress
 
 class SmtpScriptTest {
 
     @Test
     fun `test smtp script`() {
-        val sessionConfig = SmtpConfig()
-        sessionConfig.host("localhost")
-        sessionConfig.port(2525)
+        val sessionConfig = { config:SmtpConfig ->
+            config.host("localhost")
+            config.port(2525)
+            Unit
+        }
 
-        val message = smtp(sessionConfig) {
+        val spec = smtp(sessionConfig) {
             header("gaia@leftshift.one", "subject") {
                 to("test@leftshift.one")
             }
@@ -27,9 +28,9 @@ class SmtpScriptTest {
             }
         }
 
-        Assertions.assertEquals((message.from[0] as InternetAddress).address, "gaia@leftshift.one")
-        Assertions.assertEquals(message.subject, "subject")
-        Assertions.assertEquals((message.allRecipients[0] as InternetAddress).address, "test@leftshift.one")
+        Assertions.assertEquals((spec.message.from[0] as InternetAddress).address, "gaia@leftshift.one")
+        Assertions.assertEquals(spec.message.subject, "subject")
+        Assertions.assertEquals((spec.message.allRecipients[0] as InternetAddress).address, "test@leftshift.one")
     }
 
 }
