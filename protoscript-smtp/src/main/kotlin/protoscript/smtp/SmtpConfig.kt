@@ -16,11 +16,13 @@ class SmtpConfig : Properties() {
         startTls(true)
         connectionTimeout(10000)
         timeout(10000)
+        sslProtocols("TLSv1 TLSv1.1 TLSv1.2")
         put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory")
     }
 
-    fun auth(auth:Boolean) = put("mail.smtp.auth", "$auth")
+    fun auth(auth: Boolean) = put("mail.smtp.auth", "$auth")
     fun startTls(startTls: Boolean) = put("mail.smtp.starttls.enable", "$startTls")
+    fun sslProtocols(protocols: String) = put("mail.smtp.ssl.protocols", protocols)
     fun host(host:String) = put("mail.smtp.host", host)
     fun port(port:Int) = put("mail.smtp.port", port)
     fun sslTrust(sslTrust:String) = put("mail.smtp.ssl.trust", sslTrust)
