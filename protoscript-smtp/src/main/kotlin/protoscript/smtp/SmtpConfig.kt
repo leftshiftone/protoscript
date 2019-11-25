@@ -20,7 +20,10 @@ class SmtpConfig : Properties() {
     }
 
     fun auth(auth:Boolean) = put("mail.smtp.auth", "$auth")
-    fun startTls(startTls: Boolean) = put("mail.smtp.starttls.enable", "$startTls")
+    fun startTls(startTls: Boolean) {
+        put("mail.smtp.starttls.enable", "$startTls")
+        if(startTls) put("mail.smtp.ssl.protocols", "TLSv1.2")
+    }
     fun host(host:String) = put("mail.smtp.host", host)
     fun port(port:Int) = put("mail.smtp.port", port)
     fun sslTrust(sslTrust:String) = put("mail.smtp.ssl.trust", sslTrust)
