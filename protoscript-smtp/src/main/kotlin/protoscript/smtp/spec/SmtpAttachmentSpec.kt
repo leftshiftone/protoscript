@@ -12,6 +12,7 @@ class SmtpAttachmentSpec(private val multipart: MimeMultipart) {
     fun svg(bytes: ByteArray, name: String) = multipart.addBodyPart(toMimeBodyPart(bytes, "image/svg+xml", "${name}.svg"))
     fun png(bytes: ByteArray, name: String) = multipart.addBodyPart(toMimeBodyPart(bytes, "image/png", "${name}.png"))
     fun pdf(bytes: ByteArray, name: String) = multipart.addBodyPart(toMimeBodyPart(bytes, "application/pdf", "${name}.pdf"))
+    fun zip(bytes: ByteArray, name: String) = multipart.addBodyPart(toMimeBodyPart(bytes, "application/zip", "${name}.zip"))
 
     private fun toMimeBodyPart(bytes: ByteArray, mimeType: String, name: String): MimeBodyPart {
         val part = MimeBodyPart()
