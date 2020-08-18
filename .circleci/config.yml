@@ -90,13 +90,6 @@ jobs:
 workflows:
   version: 2
   build:
-    triggers:
-      - schedule:
-          cron: "45 8 * * 2"
-          filters:
-            branches:
-              only:
-                - master
     jobs:
       - build:
           context: asteria
@@ -108,6 +101,21 @@ workflows:
           filters:
             tags:
               ignore: /.*/
+          requires:
+            - build
+  weekly-snapshot-build:
+    triggers:
+      - schedule:
+          cron: "50 8 * * 2"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build:
+          context: asteria
+      - webhook-completed:
+          context: asteria
           requires:
             - build
   release:
