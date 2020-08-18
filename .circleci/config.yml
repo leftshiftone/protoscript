@@ -106,7 +106,7 @@ workflows:
   weeklyBuild:
     triggers:
       - schedule:
-          cron: "8 * * * *"
+          cron: "20 * * * *"
           filters:
             branches:
               only:
