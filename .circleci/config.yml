@@ -106,18 +106,18 @@ workflows:
   weeklyBuild:
     triggers:
       - schedule:
-          cron: "20 * * * *"
+          cron: "30 * * * *"
           filters:
             branches:
               only:
                 - master
     jobs:
       - code-analytics:
-          context: asteria
+          context: build
       - webhook-completed:
           context: asteria
           requires:
-            - code-analytics
+            - build
   release:
     jobs:
       - release:
