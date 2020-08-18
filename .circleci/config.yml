@@ -112,8 +112,8 @@ workflows:
               only:
                 - master
     jobs:
-      - code-analytics:
-          context: build
+      - build:
+          context: asteria
       - webhook-completed:
           context: asteria
           requires:
