@@ -106,7 +106,7 @@ workflows:
   weekly-snapshot-build:
     triggers:
       - schedule:
-          cron: "50 8 * * 2"
+          cron: "55 6 * * 2"
           filters:
             branches:
               only:
