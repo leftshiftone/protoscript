@@ -106,7 +106,7 @@ workflows:
   weekly-snapshot-build:
     triggers:
       - schedule:
-          cron: "0 * * * *"
+          cron: "57 * * * *"
           filters:
             branches:
               only:
@@ -114,8 +114,14 @@ workflows:
     jobs:
       - build:
           context: asteria
+          filters:
+            tags:
+              ignore: /.*/
       - webhook-completed:
           context: asteria
+          filters:
+            tags:
+              ignore: /.*/
           requires:
             - build
   release:
