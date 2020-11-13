@@ -57,6 +57,14 @@ allprojects {
         dependencyManagementEnabled = false
         enableBranchSnapshotRepositories = true
     }
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == "org.jetbrains.kotlin") {
+                details.useVersion versionKotlin
+            }
+        }
+    }
 
     asteriaCodeAnalytics {
         sonarUrl = System.getenv("SONAR_HOST_URL")
