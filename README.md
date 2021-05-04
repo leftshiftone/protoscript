@@ -1,6 +1,7 @@
 [![CircleCI branch](https://img.shields.io/circleci/project/github/leftshiftone/protoscript/master.svg?style=flat-square)](https://circleci.com/gh/leftshiftone/protoscript)
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/leftshiftone/protoscript.svg?style=flat-square)](https://github.com/leftshiftone/protoscript/tags)
-[![Bintray](https://img.shields.io/badge/dynamic/json.svg?label=bintray&query=name&style=flat-square&url=https%3A%2F%2Fapi.bintray.com%2Fpackages%2Fleftshiftone%2Fprotoscript%2Fone.leftshift.protoscript.protoscript-smtp%2Fversions%2F_latest)](https://bintray.com/leftshiftone/protoscript/one.leftshift.protoscript.protoscript-smtp/_latestVersion)
+[![Maven Central](https://img.shields.io/maven-central/v/one.leftshift.protoscript/protoscript-smtp?style=flat-square)](https://mvnrepository.com/artifact/one.leftshift.protoscript/protoscript-smtp)
+
 
 # Protocol Scripts (a.k.a. protoscript)
 
