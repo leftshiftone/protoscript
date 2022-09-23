@@ -1,11 +1,13 @@
 package protoscript.smtp
 
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import protoscript.smtp.SmtpScript.Companion.smtp
 import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
 
+@Disabled("Manual Test. Check Bitwarden for protected data")
 class ManualE2ESmtpScriptTest {
 
     private val smtpBasicAuth = SMTPConfig(
