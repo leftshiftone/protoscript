@@ -37,8 +37,6 @@ class SmtpConfig : Properties() {
     fun password(password:String) = this.password.set(password)
     fun password() = this.password.get()
 
-//    fun authenticator(authenticator: Authenticator) = this.authenticator.set(authenticator)
-
     fun authenticator(configurer: OAuthSpec.() -> Unit){
         val mutableMap= mutableMapOf<String,String>()
         OAuthSpec(mutableMap).apply(configurer)
@@ -47,7 +45,8 @@ class SmtpConfig : Properties() {
     }
 
     fun openSession(): Session{
-        if (this.authenticator.get() == null) return Session.getInstance(this, PasswordAuthenticator(this))
+        if (this.authenticator.get() == null)
+            return Session.getInstance(this, PasswordAuthenticator(this))
         return Session.getInstance(this, this.authenticator.get())
     }
 
