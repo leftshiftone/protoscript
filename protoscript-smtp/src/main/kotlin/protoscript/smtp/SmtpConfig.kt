@@ -1,5 +1,6 @@
 package protoscript.smtp
 
+import protoscript.smtp.spec.OAuthSpec
 import java.util.*
 import java.util.concurrent.atomic.AtomicReference
 import javax.mail.Authenticator
@@ -10,6 +11,7 @@ class SmtpConfig : Properties() {
 
     private val username = AtomicReference<String>()
     private val password = AtomicReference<String>()
+    private val authenticator = AtomicReference<Authenticator?>()
 
     init {
         auth(true)
@@ -35,7 +37,19 @@ class SmtpConfig : Properties() {
     fun password(password:String) = this.password.set(password)
     fun password() = this.password.get()
 
-    fun openSession() = Session.getInstance(this, PasswordAuthenticator(this))
+//    fun authenticator(authenticator: Authenticator) = this.authenticator.set(authenticator)
+
+    fun authenticator(configurer: OAuthSpec.() -> Unit){
+        val mutableMap= mutableMapOf<String,String>()
+        OAuthSpec(mutableMap).apply(configurer)
+        put("mail.smtp.auth.mechanisms", "XOAUTH2")
+        this.authenticator.set(OAuthAuthenticator(mutableMap))
+    }
+
+    fun openSession(): Session{
+        if (this.authenticator.get() == null) return Session.getInstance(this, PasswordAuthenticator(this))
+        return Session.getInstance(this, this.authenticator.get())
+    }
 
     private class PasswordAuthenticator(val config: SmtpConfig) : Authenticator() {
         override fun getPasswordAuthentication(): PasswordAuthentication {
