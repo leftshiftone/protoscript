@@ -78,7 +78,7 @@ class ManualE2ESmtpScriptTest {
 
 
         val spec = smtp(sessionConfig) {
-            header(smtpOAuth.username, "Patricio Trabajador Bearer") {
+            header(smtpOAuth.username, "Email subject with OAuth") {
                 to("xxxxxx@leftshift.one")
             }
             content {
